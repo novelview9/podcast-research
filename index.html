@@ -5,1004 +5,313 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>윤담백 팟캐스트 출연 리서치</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e0e0e0; line-height: 1.6; }
-  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 48px 24px; text-align: center; border-bottom: 1px solid #333; }
-  .header h1 { font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-  .header p { color: #888; font-size: 14px; }
-  .header .stats { display: flex; justify-content: center; gap: 24px; margin-top: 16px; }
-  .header .stat { background: rgba(255,255,255,0.06); padding: 8px 16px; border-radius: 8px; font-size: 13px; }
-  .header .stat strong { color: #4fc3f7; }
-  .container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
-  .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; position: sticky; top: 0; background: #0a0a0a; padding: 12px 0; z-index: 10; border-bottom: 1px solid #1a1a1a; }
-  .filter-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid #333; background: transparent; color: #aaa; cursor: pointer; font-size: 13px; transition: all 0.2s; }
-  .filter-btn:hover, .filter-btn.active { background: #4fc3f7; color: #000; border-color: #4fc3f7; }
-  .section-title { font-size: 18px; font-weight: 600; color: #fff; margin: 32px 0 16px; padding-left: 12px; border-left: 3px solid #4fc3f7; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
-  .card { background: #141414; border: 1px solid #222; border-radius: 12px; padding: 20px; transition: all 0.2s; position: relative; }
-  .card:hover { border-color: #4fc3f7; transform: translateY(-2px); }
-  .card .top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-  .card h3 { font-size: 16px; color: #fff; font-weight: 600; }
-  .card h3 a { color: #fff; text-decoration: none; }
-  .card h3 a:hover { color: #4fc3f7; }
-  .card .handle { font-size: 12px; color: #666; margin-top: 2px; }
-  .card .badge { font-size: 11px; padding: 3px 8px; border-radius: 4px; font-weight: 500; white-space: nowrap; }
-  .badge-easy { background: #1b5e20; color: #81c784; }
-  .badge-mid { background: #e65100; color: #ffb74d; }
-  .badge-hard { background: #b71c1c; color: #ef9a9a; }
-  .card .desc { font-size: 13px; color: #999; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .card .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-  .card .meta-item { font-size: 12px; color: #777; background: #1a1a1a; padding: 3px 8px; border-radius: 4px; }
-  .card .meta-item strong { color: #bbb; }
-  .card .contact { display: flex; flex-wrap: wrap; gap: 6px; }
-  .card .contact a, .card .contact span { font-size: 11px; padding: 3px 8px; border-radius: 4px; text-decoration: none; }
-  .contact .email { background: #1a237e; color: #90caf9; }
-  .contact .insta { background: #4a148c; color: #ce93d8; }
-  .contact .link { background: #004d40; color: #80cbc4; }
-  .tag { font-size: 11px; padding: 2px 6px; border-radius: 3px; background: #1a1a2e; color: #7986cb; margin-right: 4px; }
-  .user-added { border-color: #ff6f00 !important; }
-  .user-added::after { content: "직접 추가"; position: absolute; top: 8px; right: 12px; font-size: 10px; color: #ff6f00; background: rgba(255,111,0,0.1); padding: 2px 6px; border-radius: 3px; }
-  footer { text-align: center; padding: 40px; color: #444; font-size: 12px; border-top: 1px solid #1a1a1a; margin-top: 40px; }
-  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .header h1 { font-size: 22px; } }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#f8f9fa; color:#222; line-height:1.5; -webkit-text-size-adjust:100%; }
+
+header { background:#fff; padding:20px 16px; border-bottom:1px solid #e0e0e0; text-align:center; position:sticky; top:0; z-index:20; }
+header h1 { font-size:18px; font-weight:700; }
+header p { font-size:12px; color:#888; margin-top:2px; }
+
+.filters { display:flex; gap:6px; padding:12px 16px; overflow-x:auto; -webkit-overflow-scrolling:touch; background:#fff; border-bottom:1px solid #eee; position:sticky; top:62px; z-index:15; }
+.filters::-webkit-scrollbar { display:none; }
+.fbtn { flex-shrink:0; padding:6px 12px; border-radius:16px; border:1px solid #ddd; background:#fff; color:#555; font-size:12px; cursor:pointer; white-space:nowrap; }
+.fbtn.on { background:#222; color:#fff; border-color:#222; }
+
+.section { padding:8px 16px 4px; }
+.section h2 { font-size:14px; font-weight:700; color:#333; padding:12px 0 8px; border-bottom:2px solid #222; margin-bottom:0; }
+
+table { width:100%; border-collapse:collapse; font-size:13px; }
+thead { display:none; }
+tbody tr { display:block; background:#fff; border:1px solid #eee; border-radius:10px; margin:8px 0; padding:14px; }
+tbody tr:active { background:#f0f7ff; }
+td { display:block; padding:1px 0; }
+
+.r-name { font-size:15px; font-weight:700; color:#111; }
+.r-name a { color:#111; text-decoration:none; }
+.r-handle { font-size:11px; color:#999; }
+.r-desc { font-size:12px; color:#666; margin:6px 0; }
+.r-stats { display:flex; gap:8px; flex-wrap:wrap; margin:6px 0; }
+.r-stats span { font-size:11px; background:#f0f0f0; padding:3px 8px; border-radius:4px; color:#444; }
+.r-contact { display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; }
+.r-contact a, .r-contact span { font-size:11px; padding:4px 10px; border-radius:6px; text-decoration:none; }
+.c-email { background:#e3f2fd; color:#1565c0; }
+.c-insta { background:#fce4ec; color:#c2185b; }
+.c-link { background:#e8f5e9; color:#2e7d32; }
+
+.badge { display:inline-block; font-size:10px; font-weight:600; padding:2px 6px; border-radius:3px; margin-left:6px; vertical-align:middle; }
+.b-e { background:#e8f5e9; color:#2e7d32; }
+.b-m { background:#fff3e0; color:#e65100; }
+.b-h { background:#fce4ec; color:#c62828; }
+
+.user-tag { font-size:9px; background:#fff3e0; color:#e65100; padding:1px 5px; border-radius:3px; margin-left:4px; }
+
+footer { text-align:center; padding:24px; font-size:11px; color:#aaa; }
+
+@media(min-width:700px) {
+  .wrap { max-width:800px; margin:0 auto; }
+  tbody tr { display:table-row; background:#fff; border:none; border-radius:0; margin:0; padding:0; }
+  tbody tr:hover { background:#f5f8ff; }
+  tbody tr { border-bottom:1px solid #f0f0f0; }
+  thead { display:table-header-group; }
+  th { text-align:left; padding:10px 8px; font-size:12px; color:#999; font-weight:500; border-bottom:2px solid #ddd; }
+  td { display:table-cell; padding:10px 8px; vertical-align:top; }
+  .r-desc { display:none; }
+  table { background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+}
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<div class="header">
+<header>
   <h1>윤담백 팟캐스트 출연 리서치</h1>
-  <p>@ddd-lab | 구독자 8.49K | 패션 · 연애 · 음악 · 코미디</p>
-  <div class="stats">
-    <div class="stat"><strong>60+</strong> 채널</div>
-    <div class="stat"><strong>12</strong> 카테고리</div>
-    <div class="stat">2026.04.04 기준</div>
-  </div>
-</div>
+  <p>@ddd-lab · 구독자 8.49K · 2026.04.04 기준 · 60+ 채널</p>
+</header>
 
-<div class="container">
-
-<div class="filter-bar">
-  <button class="filter-btn active" onclick="filterCards('all')">전체</button>
-  <button class="filter-btn" onclick="filterCards('fashion')">패션</button>
-  <button class="filter-btn" onclick="filterCards('hiphop')">힙합/음악</button>
-  <button class="filter-btn" onclick="filterCards('comedy')">코미디</button>
-  <button class="filter-btn" onclick="filterCards('dating')">연애</button>
-  <button class="filter-btn" onclick="filterCards('interview')">인터뷰/커리어</button>
-  <button class="filter-btn" onclick="filterCards('lifestyle')">라이프스타일</button>
-  <button class="filter-btn" onclick="filterCards('street')">스트릿/서브컬처</button>
-  <button class="filter-btn" onclick="filterCards('misc')">기타</button>
-  <button class="filter-btn" onclick="filterCards('easy')" style="border-color:#1b5e20">섭외 쉬움</button>
+<div class="filters">
+  <button class="fbtn on" onclick="ft('all',this)">전체</button>
+  <button class="fbtn" onclick="ft('fashion',this)">패션</button>
+  <button class="fbtn" onclick="ft('hiphop',this)">힙합/음악</button>
+  <button class="fbtn" onclick="ft('street',this)">스트릿</button>
+  <button class="fbtn" onclick="ft('comedy',this)">코미디</button>
+  <button class="fbtn" onclick="ft('dating',this)">연애</button>
+  <button class="fbtn" onclick="ft('interview',this)">인터뷰</button>
+  <button class="fbtn" onclick="ft('lifestyle',this)">라이프스타일</button>
+  <button class="fbtn" onclick="ft('misc',this)">기타</button>
+  <button class="fbtn" style="border-color:#2e7d32;color:#2e7d32" onclick="ft('easy',this)">섭외 쉬움</button>
 </div>
 
 <!-- ===== 패션 ===== -->
-<h2 class="section-title" id="fashion">패션</h2>
-<div class="grid">
-
-<div class="card" data-cat="fashion" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@posty_jb" target="_blank">남궁재불 — 원앤온리</a></h3><div class="handle">@posty_jb</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">음악+패션+문화 크로스오버 1:1 심층 대담. EP.29까지. 래퍼, 디자이너, 아티스트 게스트</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 5.12만</span>
-    <span class="meta-item"><strong>평균</strong> ~5,000회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:yiyiyi55@naver.com">yiyiyi55@naver.com</a>
-    <a class="insta" href="https://instagram.com/posty_jb" target="_blank">@posty_jb</a>
-  </div>
+<div class="section" data-sec="fashion">
+<h2>패션 (10)</h2>
+<table>
+<thead><tr><th>채널</th><th>구독자</th><th>평균조회</th><th>연락처</th><th>난이도</th></tr></thead>
+<tbody>
+<tr data-cat="fashion" data-d="mid">
+  <td>
+    <div class="r-name"><a href="https://youtube.com/@posty_jb" target="_blank">남궁재불 — 원앤온리</a><span class="badge b-m">중간</span></div>
+    <div class="r-handle">@posty_jb</div>
+    <div class="r-desc">음악+패션+문화 크로스 1:1 대담. EP.29. 래퍼, 디자이너 게스트</div>
+  </td>
+  <td><div class="r-stats"><span>5.12만</span></div></td>
+  <td><div class="r-stats"><span>~5,000</span></div></td>
+  <td><div class="r-contact"><a class="c-email" href="mailto:yiyiyi55@naver.com">이메일</a><a class="c-insta" href="https://instagram.com/posty_jb" target="_blank">인스타</a></div></td>
+  <td></td>
+</tr>
+<tr data-cat="fashion" data-d="mid">
+  <td>
+    <div class="r-name"><a href="https://youtube.com/@fashionfighting" target="_blank">장석종</a><span class="badge b-m">중간</span></div>
+    <div class="r-handle">@fashionfighting</div>
+    <div class="r-desc">패션 전문 팟캐스트. 업계 인사 초대 대담. 합정동 공간 운영</div>
+  </td>
+  <td><div class="r-stats"><span>4.21만</span></div></td>
+  <td><div class="r-stats"><span>~6,300</span></div></td>
+  <td><div class="r-contact"><a class="c-email" href="mailto:deeperenttube@gmail.com">이메일</a><a class="c-insta" href="https://instagram.com/deeperent_vvvsociety" target="_blank">인스타</a></div></td>
+  <td></td>
+</tr>
+<tr data-cat="fashion" data-d="mid">
+  <td>
+    <div class="r-name"><a href="https://youtube.com/@HOWABOUTOOTD" target="_blank">HOW ABOUT OOTD</a><span class="badge b-m">중간</span></div>
+    <div class="r-handle">@HOWABOUTOOTD</div>
+    <div class="r-desc">스타일리스트 운영. 런웨이 분석, 트렌드 토크. 콜라보 활발</div>
+  </td>
+  <td><div class="r-stats"><span>8.29만</span></div></td>
+  <td><div class="r-stats"><span>~10,000</span></div></td>
+  <td><div class="r-contact"><a class="c-email" href="mailto:howaboutootd@gmail.com">이메일</a><a class="c-insta" href="https://instagram.com/howabout_ootd" target="_blank">인스타</a></div></td>
+  <td></td>
+</tr>
+<tr data-cat="fashion" data-d="mid">
+  <td>
+    <div class="r-name"><a href="https://youtube.com/@남자패션" target="_blank">테이스터 션 — 테토</a><span class="badge b-m">중간</span></div>
+    <div class="r-handle">@남자패션</div>
+    <div class="r-desc">남자 패션 리뷰 + "테토" 패션 토크 팟캐스트</div>
+  </td>
+  <td><div class="r-stats"><span>7.19만</span></div></td>
+  <td><div class="r-stats"><span>~10,700</span></div></td>
+  <td><div class="r-contact"><a class="c-email" href="mailto:fitture11@gmail.com">이메일</a></div></td>
+  <td></td>
+</tr>
+<tr data-cat="fashion" data-d="mid">
+  <td>
+    <div class="r-name"><a href="https://youtube.com/@oncuration" target="_blank">온큐레이션 — 온담패설</a><span class="badge b-m">중간</span></div>
+    <div class="r-handle">@oncuration</div>
+    <div class="r-desc">패션 매거진 기반 팟캐스트. 편집샵 바이어, 디자이너 현직자 게스트</div>
+  </td>
+  <td><div class="r-stats"><span>1.7만</span></div></td>
+  <td><div class="r-stats"><span>~2,400</span></div></td>
+  <td><div class="r-contact"><a class="c-email" href="mailto:info@oncuration.com">이메일</a><a class="c-insta" href="https://instagram.com/oncuration" target="_blank">인스타</a></div></td>
+  <td></td>
+</tr>
+<tr data-cat="fashion" data-d="mid">
+  <td>
+    <div class="r-name"><a href="https://youtube.com/@윤대리" target="_blank">패션회사 윤대리</a><span class="badge b-m">중간</span></div>
+    <div class="r-handle">@윤대리</div>
+    <div class="r-desc">현직 패션 MD. 브랜드 리뷰, 시장분석, 타채널 콜라보</div>
+  </td>
+  <td><div class="r-stats"><span>2.32만</span></div></td>
+  <td><div class="r-stats"><span>~11,000</span></div></td>
+  <td><div class="r-contact"><a class="c-insta" href="https://instagram.com/comme_des_pink" target="_blank">인스타</a></div></td>
+  <td></td>
+</tr>
+<tr data-cat="fashion" data-d="easy">
+  <td>
+    <div class="r-name"><a href="https://youtube.com/@kkjrhyker" target="_blank">김광종 — 광캐스트</a><span class="badge b-e">쉬움</span></div>
+    <div class="r-handle">@kkjrhyker</div>
+    <div class="r-desc">편집샵 디렉터. 패션 팟캐스트 신규 런칭. 게스트 필요한 시기</div>
+  </td>
+  <td><div class="r-stats"><span>2.59K</span></div></td>
+  <td><div class="r-stats"><span>~1,300</span></div></td>
+  <td><div class="r-contact"><a class="c-email" href="mailto:rhykerkim9984@gmail.com">이메일</a><a class="c-insta" href="https://instagram.com/kwangstargram_" target="_blank">인스타</a></div></td>
+  <td></td>
+</tr>
+<tr data-cat="fashion" data-d="easy">
+  <td>
+    <div class="r-name"><a href="https://youtube.com/@lighthousestore" target="_blank">라이트하우스 스토어</a><span class="badge b-e">쉬움</span></div>
+    <div class="r-handle">@lighthousestore</div>
+    <div class="r-desc">빈티지숍. "당신의 애장품을 소개합니다" 게스트 시리즈</div>
+  </td>
+  <td><div class="r-stats"><span>2.46K</span></div></td>
+  <td><div class="r-stats"><span>~3,000</span></div></td>
+  <td><div class="r-contact"><a class="c-email" href="mailto:Lighthouse_store@naver.com">이메일</a><a class="c-insta" href="https://instagram.com/lighthouse.vintage" target="_blank">인스타</a></div></td>
+  <td></td>
+</tr>
+<tr data-cat="fashion" data-d="easy">
+  <td>
+    <div class="r-name"><a href="https://youtube.com/@momohwang" target="_blank">momo hwang</a><span class="badge b-e">쉬움</span></div>
+    <div class="r-handle">@momohwang</div>
+    <div class="r-desc">"인터넷 프렌즈 라디오" 글로벌 패션 문화 팟캐스트</div>
+  </td>
+  <td><div class="r-stats"><span>3.78K</span></div></td>
+  <td><div class="r-stats"><span>~600</span></div></td>
+  <td><div class="r-contact"><a class="c-email" href="mailto:momohwang.works@gmail.com">이메일</a><a class="c-insta" href="https://instagram.com/moransaidthat" target="_blank">인스타</a></div></td>
+  <td></td>
+</tr>
+<tr data-cat="fashion" data-d="hard">
+  <td>
+    <div class="r-name"><a href="https://youtube.com/@Moneygraphy" target="_blank">머니그라피 — B주류초대석</a><span class="badge b-h">높음</span></div>
+    <div class="r-handle">@Moneygraphy</div>
+    <div class="r-desc">취향/문화/경제 토크. 패션 편집장 등 초대</div>
+  </td>
+  <td><div class="r-stats"><span>67.8만</span></div></td>
+  <td><div class="r-stats"><span>16만+</span></div></td>
+  <td><div class="r-contact"><a class="c-email" href="mailto:moneygraphy@toss.im">이메일</a><a class="c-insta" href="https://instagram.com/moneygraphyworld" target="_blank">인스타</a></div></td>
+  <td></td>
+</tr>
+</tbody>
+</table>
 </div>
 
-<div class="card" data-cat="fashion" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@fashionfighting" target="_blank">장석종</a></h3><div class="handle">@fashionfighting</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">패션 전문 팟캐스트. 패션업계 인사 초대 대담, 브랜드 리뷰. 합정동 오프라인 공간 운영</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 4.21만</span>
-    <span class="meta-item"><strong>평균</strong> ~6,300회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:deeperenttube@gmail.com">deeperenttube@gmail.com</a>
-    <a class="insta" href="https://instagram.com/deeperent_vvvsociety" target="_blank">@deeperent_vvvsociety</a>
-  </div>
+<!-- ===== 힙합/음악 ===== -->
+<div class="section" data-sec="hiphop">
+<h2>힙합 / 음악 (9)</h2>
+<table><tbody>
+<tr data-cat="hiphop" data-d="hard"><td><div class="r-name"><a href="https://youtube.com/@HIPHOP-PLAYA" target="_blank">HIPHOPPLAYA 힙플라디오</a><span class="badge b-h">높음</span></div><div class="r-handle">@HIPHOP-PLAYA</div><div class="r-desc">한국 최대 힙합 미디어. 시즌2 매주 게스트</div></td><td><div class="r-stats"><span>31.3만</span></div></td><td><div class="r-stats"><span>~12만</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:contact@hiphopplaya.com">이메일</a><a class="c-insta" href="https://instagram.com/hiphopplaya" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="hiphop" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@spns.televison" target="_blank">SPNS TV — 슈즈오프</a><span class="badge b-m">중간</span></div><div class="r-handle">@spns.televison</div><div class="r-desc">오메가사피엔 + VC 투자자 진행. 아티스트/크리에이터 게스트</div></td><td><div class="r-stats"><span>7.94만</span></div></td><td><div class="r-stats"><span>~3-4만</span></div></td><td><div class="r-contact"><a class="c-insta" href="https://instagram.com/spns.tv" target="_blank">인스타 DM</a></div></td><td></td></tr>
+<tr data-cat="hiphop" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@paloaltongue" target="_blank">Paloalto — 팔캐스트</a><span class="badge b-m">중간</span></div><div class="r-handle">@paloaltongue</div><div class="r-desc">힙합 1세대 래퍼 직접 진행. 아티스트 심층 인터뷰</div></td><td><div class="r-stats"><span>1.91만</span></div></td><td><div class="r-stats"><span>~2만</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:modernartssociety.mgmt@gmail.com">이메일</a></div></td><td></td></tr>
+<tr data-cat="hiphop" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@sksmsdudzpdl" target="_blank">공케이 — 0번 버스</a><span class="badge b-m">중간</span></div><div class="r-handle">@sksmsdudzpdl</div><div class="r-desc">음악/엔터 토크. 브라이언, 이영현 등 뮤지션 게스트</div></td><td><div class="r-stats"><span>15.3만</span></div></td><td><div class="r-stats"><span>~4.3만</span></div></td><td><div class="r-contact"><a class="c-insta" href="https://instagram.com/from_gongk" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="hiphop" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@alexalexalex_ch" target="_blank">알렉스알렉스알렉스</a><span class="badge b-m">중간</span></div><div class="r-handle">@alexalexalex_ch</div><div class="r-desc">외국인 호스트 영어 인터뷰. 래퍼/크리에이터 게스트</div></td><td><div class="r-stats"><span>2.03만</span></div></td><td><div class="r-stats"><span>~3,000</span></div></td><td><div class="r-contact"><a class="c-insta" href="https://instagram.com/whyeveryalextaken" target="_blank">인스타 DM</a></div></td><td></td></tr>
+<tr data-cat="hiphop" data-d="easy"><td><div class="r-name"><a href="https://youtube.com/@bugokhawa2" target="_blank">부곡하와2 — 더위톡</a><span class="badge b-e">쉬움</span></div><div class="r-handle">@bugokhawa2</div><div class="r-desc">힙합 씬 토크. EP.72까지. 래퍼 마브, DKAY 게스트</div></td><td><div class="r-stats"><span>2.35K</span></div></td><td><div class="r-stats"><span>~8,700</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:bugokhawa2@gmail.com">이메일</a><a class="c-insta" href="https://instagram.com/bugokhawa2" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="hiphop" data-d="easy"><td><div class="r-name"><a href="https://youtube.com/@김건" target="_blank">김건 — 건캐스트</a><span class="badge b-e">쉬움</span></div><div class="r-handle">@김건</div><div class="r-desc">종합예능. 홍대 래퍼 초대 건캐스트 신규 런칭</div></td><td><div class="r-stats"><span>1.23만</span></div></td><td><div class="r-stats"><span>~5,500</span></div></td><td><div class="r-contact"><a class="c-insta" href="https://instagram.com/natural_born_assa" target="_blank">인스타 DM</a></div></td><td></td></tr>
+<tr data-cat="hiphop" data-d="easy"><td><div class="r-name"><a href="https://youtube.com/@KimsInnpodcasts" target="_blank">김씨네 여인숙</a><span class="badge b-e">쉬움</span></div><div class="r-handle">@KimsInnpodcasts</div><div class="r-desc">음악산업 종사자 인터뷰. EP24까지</div></td><td><div class="r-stats"><span>816</span></div></td><td><div class="r-stats"><span>~720</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:kimsinnpodcasts@gmail.com">이메일</a><a class="c-insta" href="https://instagram.com/kimsinn_podcasts" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="hiphop" data-d="easy"><td><div class="r-name"><a href="https://youtube.com/channel/UC2M6SkJWEK6ehHB8az6Mcpw" target="_blank">드럼통 프렌즈</a><span class="badge b-e">쉬움</span><span class="user-tag">직접추가</span></div><div class="r-handle">@드럼통프렌즈</div><div class="r-desc">힙합 팟캐스트. 언더 래퍼 인터뷰 + 라이브. 매주 업로드</div></td><td><div class="r-stats"><span>870</span></div></td><td><div class="r-stats"><span>~1,012</span></div></td><td><div class="r-contact"><a class="c-link" href="https://linktr.ee/DRTfriends" target="_blank">링크트리</a></div></td><td></td></tr>
+</tbody></table>
 </div>
 
-<div class="card" data-cat="fashion" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@HOWABOUTOOTD" target="_blank">HOW ABOUT OOTD</a></h3><div class="handle">@HOWABOUTOOTD</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">스타일리스트 운영. 런웨이 분석, 스타일링, 트렌드 토크. 콜라보 활발</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 8.29만</span>
-    <span class="meta-item"><strong>평균</strong> ~10,000회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:howaboutootd@gmail.com">howaboutootd@gmail.com</a>
-    <a class="insta" href="https://instagram.com/howabout_ootd" target="_blank">@howabout_ootd</a>
-  </div>
+<!-- ===== 스트릿/서브컬처 ===== -->
+<div class="section" data-sec="street">
+<h2>스트릿 / 서브컬처 (2)</h2>
+<table><tbody>
+<tr data-cat="street" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@koreaisgay32" target="_blank">빨간줄</a><span class="badge b-m">중간</span></div><div class="r-handle">@koreaisgay32</div><div class="r-desc">패션/스트릿 문화. 빈티지샵 탐방, 래퍼 아웃핏 평가, 게스트 토크</div></td><td><div class="r-stats"><span>3.68만</span></div></td><td><div class="r-stats"><span>~2.77만</span></div></td><td><div class="r-contact"><a class="c-insta" href="https://instagram.com/momisgay32" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="street" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@kimganji666" target="_blank">하키포키 스튜디오 — 통통배</a><span class="badge b-m">중간</span></div><div class="r-handle">@kimganji666</div><div class="r-desc">김간지, 뱃사공, 빨간줄. 스트릿/힙합 토크쇼. 매주 게스트</div></td><td><div class="r-stats"><span>5.21만</span></div></td><td><div class="r-stats"><span>~2.9만</span></div></td><td><div class="r-contact"><a class="c-insta" href="https://instagram.com/kimganji666" target="_blank">인스타</a></div></td><td></td></tr>
+</tbody></table>
 </div>
 
-<div class="card" data-cat="fashion" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@남자패션" target="_blank">테이스터 션 (테토)</a></h3><div class="handle">@남자패션</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">남자 패션 리뷰/추천 + "테토" 패션 토크 팟캐스트. 패션 브랜드 헤이스트 운영</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 7.19만</span>
-    <span class="meta-item"><strong>평균</strong> ~10,700회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:fitture11@gmail.com">fitture11@gmail.com</a>
-  </div>
-</div>
-
-<div class="card" data-cat="fashion" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@oncuration" target="_blank">온큐레이션 — 온담패설</a></h3><div class="handle">@oncuration</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">패션 웹매거진 기반 팟캐스트. 편집샵 바이어, 코오롱FnC 디자이너 등 현직자 게스트</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 1.7만</span>
-    <span class="meta-item"><strong>평균</strong> ~2,400회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:info@oncuration.com">info@oncuration.com</a>
-    <a class="insta" href="https://instagram.com/oncuration" target="_blank">@oncuration</a>
-  </div>
-</div>
-
-<div class="card" data-cat="fashion" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@윤대리" target="_blank">패션회사 윤대리</a></h3><div class="handle">@윤대리</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">현직 패션 MD. 브랜드 리뷰, 시장분석, 도쿄 패션 토크. 타채널 콜라보 참여</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 2.32만</span>
-    <span class="meta-item"><strong>평균</strong> ~11,000회</span>
-  </div>
-  <div class="contact">
-    <a class="insta" href="https://instagram.com/comme_des_pink" target="_blank">@comme_des_pink</a>
-  </div>
-</div>
-
-<div class="card" data-cat="fashion" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@kkjrhyker" target="_blank">김광종 — 광캐스트</a></h3><div class="handle">@kkjrhyker</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">편집샵 디렉터의 패션 팟캐스트 신규 런칭. 게스트 확보 적극적일 시기</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 2.59K</span>
-    <span class="meta-item"><strong>평균</strong> ~1,300회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:rhykerkim9984@gmail.com">rhykerkim9984@gmail.com</a>
-    <a class="insta" href="https://instagram.com/kwangstargram_" target="_blank">@kwangstargram_</a>
-  </div>
-</div>
-
-<div class="card" data-cat="fashion" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@lighthousestore" target="_blank">라이트하우스 스토어</a></h3><div class="handle">@lighthousestore</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">빈티지숍 운영자. "당신의 애장품을 소개합니다" 게스트 시리즈 신규 런칭</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 2.46K</span>
-    <span class="meta-item"><strong>평균</strong> ~3,000회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:Lighthouse_store@naver.com">Lighthouse_store@naver.com</a>
-    <a class="insta" href="https://instagram.com/lighthouse.vintage" target="_blank">@lighthouse.vintage</a>
-  </div>
-</div>
-
-<div class="card" data-cat="fashion" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@momohwang" target="_blank">momo hwang</a></h3><div class="handle">@momohwang</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">"인터넷 프렌즈 라디오" 팟캐스트. 글로벌 패션 문화, 젠지 패션 토크</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 3.78K</span>
-    <span class="meta-item"><strong>평균</strong> ~600회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:momohwang.works@gmail.com">momohwang.works@gmail.com</a>
-    <a class="insta" href="https://instagram.com/moransaidthat" target="_blank">@moransaidthat</a>
-  </div>
-</div>
-
-<div class="card" data-cat="fashion" data-diff="hard">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@Moneygraphy" target="_blank">머니그라피 — B주류초대석</a></h3><div class="handle">@Moneygraphy</div></div>
-    <span class="badge badge-hard">높음</span>
-  </div>
-  <div class="desc">취향/문화/경제 토크. B주류초대석에서 패션 편집장 등 초대. 패션+문화 크로스오버</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 67.8만</span>
-    <span class="meta-item"><strong>평균</strong> 16만+</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:moneygraphy@toss.im">moneygraphy@toss.im</a>
-    <a class="insta" href="https://instagram.com/moneygraphyworld" target="_blank">@moneygraphyworld</a>
-  </div>
-</div>
-
-</div>
-
-<!-- ===== 힙합 / 음악 ===== -->
-<h2 class="section-title" id="hiphop">힙합 / 음악</h2>
-<div class="grid">
-
-<div class="card" data-cat="hiphop" data-diff="hard">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@HIPHOP-PLAYA" target="_blank">HIPHOPPLAYA 힙플라디오</a></h3><div class="handle">@HIPHOP-PLAYA</div></div>
-    <span class="badge badge-hard">높음</span>
-  </div>
-  <div class="desc">한국 최대 힙합 미디어. 힙플라디오 시즌2 (MC 휘민 & 김민수) 매주 게스트 아티스트 초대</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 31.3만</span>
-    <span class="meta-item"><strong>평균</strong> ~12만회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:contact@hiphopplaya.com">contact@hiphopplaya.com</a>
-    <a class="insta" href="https://instagram.com/hiphopplaya" target="_blank">@hiphopplaya</a>
-  </div>
-</div>
-
-<div class="card" data-cat="hiphop" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@spns.televison" target="_blank">SPNS TV — 슈즈오프</a></h3><div class="handle">@spns.televison</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">래퍼 오메가사피엔 + 전직 VC 투자자 진행. 힙합 아티스트/크리에이터 게스트 매주 수요일</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 7.94만</span>
-    <span class="meta-item"><strong>평균</strong> ~3-4만회</span>
-  </div>
-  <div class="contact">
-    <a class="insta" href="https://instagram.com/spns.tv" target="_blank">@spns.tv (DM)</a>
-  </div>
-</div>
-
-<div class="card" data-cat="hiphop" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@paloaltongue" target="_blank">Paloalto — 팔캐스트</a></h3><div class="handle">@paloaltongue</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">힙합 1세대 래퍼 팔로알토 직접 진행. 아티스트 초대 심층 인터뷰</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 1.91만</span>
-    <span class="meta-item"><strong>평균</strong> ~2만회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:modernartssociety.mgmt@gmail.com">modernartssociety.mgmt@gmail.com</a>
-  </div>
-</div>
-
-<div class="card" data-cat="hiphop" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@bugokhawa2" target="_blank">부곡하와2 — 더위톡</a></h3><div class="handle">@bugokhawa2</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">힙합 씬 토크 팟캐스트. EP.72까지. 래퍼 마브, DKAY 등 게스트</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 2.35K</span>
-    <span class="meta-item"><strong>평균</strong> ~8,700회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:bugokhawa2@gmail.com">bugokhawa2@gmail.com</a>
-    <a class="insta" href="https://instagram.com/bugokhawa2" target="_blank">@bugokhawa2</a>
-  </div>
-</div>
-
-<div class="card" data-cat="hiphop" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@alexalexalex_ch" target="_blank">알렉스알렉스알렉스</a></h3><div class="handle">@alexalexalex_ch</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">외국인 호스트 영어 인터뷰. 래퍼/크리에이터 게스트 (서출구, 션파블로 등)</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 2.03만</span>
-    <span class="meta-item"><strong>평균</strong> ~3,000회</span>
-  </div>
-  <div class="contact">
-    <a class="insta" href="https://instagram.com/whyeveryalextaken" target="_blank">@whyeveryalextaken (DM)</a>
-  </div>
-</div>
-
-<div class="card" data-cat="hiphop" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@김건" target="_blank">김건 — 건캐스트</a></h3><div class="handle">@김건</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">종합예능 유튜버. 홍대 래퍼 초대하는 건캐스트 신규 런칭</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 1.23만</span>
-    <span class="meta-item"><strong>평균</strong> ~5,500회</span>
-  </div>
-  <div class="contact">
-    <a class="insta" href="https://instagram.com/natural_born_assa" target="_blank">@natural_born_assa (DM)</a>
-  </div>
-</div>
-
-<div class="card" data-cat="hiphop" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@sksmsdudzpdl" target="_blank">공케이 — 0번 버스</a></h3><div class="handle">@sksmsdudzpdl</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">음악/엔터 관련 토크. 가수 브라이언, 이영현 등 뮤지션 게스트 초대</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 15.3만</span>
-    <span class="meta-item"><strong>평균</strong> ~4.3만회</span>
-  </div>
-  <div class="contact">
-    <a class="insta" href="https://instagram.com/from_gongk" target="_blank">@from_gongk</a>
-  </div>
-</div>
-
-<div class="card" data-cat="hiphop" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@KimsInnpodcasts" target="_blank">김씨네 여인숙</a></h3><div class="handle">@KimsInnpodcasts</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">음악산업 종사자 인터뷰. 매니저, 싱어송라이터 등 게스트. EP24까지</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 816</span>
-    <span class="meta-item"><strong>평균</strong> ~720회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:kimsinnpodcasts@gmail.com">kimsinnpodcasts@gmail.com</a>
-    <a class="insta" href="https://instagram.com/kimsinn_podcasts" target="_blank">@kimsinn_podcasts</a>
-  </div>
-</div>
-
-<div class="card" data-cat="hiphop" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@드럼통프렌즈" target="_blank">드럼통 프렌즈</a></h3><div class="handle">@드럼통프렌즈</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">"한국 최고의 힙합 팟캐스트" 언더 래퍼 인터뷰 + 라이브 퍼포먼스. 매주 업로드</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 870</span>
-    <span class="meta-item"><strong>평균</strong> ~1,012회</span>
-  </div>
-  <div class="contact">
-    <a class="link" href="https://linktr.ee/DRTfriends" target="_blank">linktr.ee/DRTfriends</a>
-  </div>
-</div>
-
-</div>
-
-<!-- ===== 스트릿 / 서브컬처 ===== -->
-<h2 class="section-title" id="street">스트릿 / 서브컬처</h2>
-<div class="grid">
-
-<div class="card" data-cat="street" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@koreaisgay32" target="_blank">빨간줄</a></h3><div class="handle">@koreaisgay32</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">패션/스트릿 문화 중심. 빈티지샵 탐방, 래퍼 아웃핏 평가, 게스트 초대 토크</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 3.68만</span>
-    <span class="meta-item"><strong>평균</strong> ~2.77만회</span>
-  </div>
-  <div class="contact">
-    <a class="insta" href="https://instagram.com/momisgay32" target="_blank">@momisgay32</a>
-  </div>
-</div>
-
-<div class="card" data-cat="street" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@kimganji666" target="_blank">하키포키 스튜디오 — 통통배</a></h3><div class="handle">@kimganji666</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">김간지, 뱃사공, 빨간줄 등 스트릿/힙합 크리에이터들의 토크쇼. 매주 게스트</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 5.21만</span>
-    <span class="meta-item"><strong>평균</strong> ~2.9만회</span>
-  </div>
-  <div class="contact">
-    <a class="insta" href="https://instagram.com/kimganji666" target="_blank">@kimganji666</a>
-  </div>
-</div>
-
-</div>
-
-<!-- ===== 코미디 / 예능 ===== -->
-<h2 class="section-title" id="comedy">코미디 / 예능</h2>
-<div class="grid">
-
-<div class="card" data-cat="comedy" data-diff="hard">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@뷰티풀너드" target="_blank">뷰티풀너드 — AK! CAST</a></h3><div class="handle">@뷰티풀너드</div></div>
-    <span class="badge badge-hard">높음</span>
-  </div>
-  <div class="desc">메타코미디 소속 (맨스티어). "세상에서 가장 무례한 팟캐스트". 침착맨 커넥션</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 147만</span>
-    <span class="meta-item"><strong>평균</strong> ~28만회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:beautifulnerd@metacomedy.net">beautifulnerd@metacomedy.net</a>
-  </div>
-</div>
-
-<div class="card" data-cat="comedy" data-diff="hard">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@B급studio" target="_blank">B급 스튜디오 — B급 청문회</a></h3><div class="handle">@B급studio</div></div>
-    <span class="badge badge-hard">높음</span>
-  </div>
-  <div class="desc">개그맨 최성민, 남호연, 김승진 MC. "증인 심문" 형식 게스트 토크쇼</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 46.9만</span>
-    <span class="meta-item"><strong>평균</strong> ~22.7만회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:blevel.st@gmail.com">blevel.st@gmail.com</a>
-    <a class="insta" href="https://instagram.com/blevel_studio" target="_blank">@blevel_studio</a>
-  </div>
-</div>
-
-<div class="card" data-cat="comedy" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@dannychocomedy" target="_blank">Danny Cho 대니초 — 털보는낮술중</a></h3><div class="handle">@dannychocomedy</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">스탠드업 코미디언. 매주 게스트 초대 술토크 팟캐스트. EP.149까지</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 32.3만</span>
-    <span class="meta-item"><strong>평균</strong> ~4,700회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:noonchipodcast@gmail.com">noonchipodcast@gmail.com</a>
-    <a class="insta" href="https://instagram.com/dannychocomedy" target="_blank">@dannychocomedy</a>
-  </div>
-</div>
-
-<div class="card" data-cat="comedy" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@americanjoke0" target="_blank">미국식농담</a></h3><div class="handle">@americanjoke0</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">스탠드업 코미디 팟캐스트. 176회 장수. 게스트 초대석 운영</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 4.68K</span>
-    <span class="meta-item"><strong>평균</strong> ~2,300회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:daywordbird@gmail.com">daywordbird@gmail.com</a>
-  </div>
-</div>
-
-<div class="card" data-cat="comedy" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@뜨거운삼각형" target="_blank">뜨거운삼각형</a></h3><div class="handle">@뜨거운삼각형</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">코미디언 강현석 중심 개그맨 토크쇼. 매회 게스트 초대. EP.46까지</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 3.62K</span>
-    <span class="meta-item"><strong>평균</strong> ~6,500회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:hot3talk@gmail.com">hot3talk@gmail.com</a>
-  </div>
-</div>
-
-<div class="card" data-cat="comedy" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@Alexandershowkorea" target="_blank">알렉산더 쇼</a></h3><div class="handle">@Alexandershowkorea</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">개그맨 알렉산더 곤잘레스 진행. 술+안주 코미디 토크쇼. 매회 게스트</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 수천</span>
-    <span class="meta-item"><strong>평균</strong> ~3,200회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:lazenca0881@naver.com">lazenca0881@naver.com</a>
-  </div>
-</div>
-
-<div class="card" data-cat="comedy" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@문천식매겨드립니다" target="_blank">문천식의 매겨드립니다</a></h3><div class="handle">@문천식매겨드립니다</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">KBS 개그맨 문천식. 전통술+게스트 인생 토크. EP7까지</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 869</span>
-    <span class="meta-item"><strong>평균</strong> ~2,700회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:csmoon1124@gmail.com">csmoon1124@gmail.com</a>
-  </div>
-</div>
-
-<div class="card" data-cat="comedy" data-diff="hard">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@CharlesEnter" target="_blank">찰스엔터 — 찰수다</a></h3><div class="handle">@CharlesEnter</div></div>
-    <span class="badge badge-hard">높음</span>
-  </div>
-  <div class="desc">"찰수다" 팟캐스트. 연예인/인플루언서 게스트 초대 토크 (이영지, 바비 등)</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 104만</span>
-    <span class="meta-item"><strong>평균</strong> ~88만회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:charlesenter@icecreative.kr">charlesenter@icecreative.kr</a>
-    <a class="insta" href="https://instagram.com/charles_is_loved" target="_blank">@charles_is_loved</a>
-  </div>
-</div>
-
+<!-- ===== 코미디 ===== -->
+<div class="section" data-sec="comedy">
+<h2>코미디 / 예능 (8)</h2>
+<table><tbody>
+<tr data-cat="comedy" data-d="hard"><td><div class="r-name"><a href="https://youtube.com/@뷰티풀너드" target="_blank">뷰티풀너드 — AK! CAST</a><span class="badge b-h">높음</span></div><div class="r-handle">@뷰티풀너드</div><div class="r-desc">메타코미디 소속. "가장 무례한 팟캐스트". 침착맨 커넥션</div></td><td><div class="r-stats"><span>147만</span></div></td><td><div class="r-stats"><span>~28만</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:beautifulnerd@metacomedy.net">이메일</a></div></td><td></td></tr>
+<tr data-cat="comedy" data-d="hard"><td><div class="r-name"><a href="https://youtube.com/@CharlesEnter" target="_blank">찰스엔터 — 찰수다</a><span class="badge b-h">높음</span></div><div class="r-handle">@CharlesEnter</div><div class="r-desc">찰수다 팟캐스트. 이영지, 바비 등 게스트 토크</div></td><td><div class="r-stats"><span>104만</span></div></td><td><div class="r-stats"><span>~88만</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:charlesenter@icecreative.kr">이메일</a><a class="c-insta" href="https://instagram.com/charles_is_loved" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="comedy" data-d="hard"><td><div class="r-name"><a href="https://youtube.com/@B급studio" target="_blank">B급 스튜디오 — B급 청문회</a><span class="badge b-h">높음</span></div><div class="r-handle">@B급studio</div><div class="r-desc">개그맨 MC. "증인 심문" 형식 게스트 토크쇼</div></td><td><div class="r-stats"><span>46.9만</span></div></td><td><div class="r-stats"><span>~22.7만</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:blevel.st@gmail.com">이메일</a><a class="c-insta" href="https://instagram.com/blevel_studio" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="comedy" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@dannychocomedy" target="_blank">Danny Cho 대니초 — 털보는낮술중</a><span class="badge b-m">중간</span></div><div class="r-handle">@dannychocomedy</div><div class="r-desc">스탠드업 코미디언. 매주 게스트 술토크. EP.149</div></td><td><div class="r-stats"><span>32.3만</span></div></td><td><div class="r-stats"><span>~4,700</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:noonchipodcast@gmail.com">이메일</a><a class="c-insta" href="https://instagram.com/dannychocomedy" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="comedy" data-d="easy"><td><div class="r-name"><a href="https://youtube.com/@americanjoke0" target="_blank">미국식농담</a><span class="badge b-e">쉬움</span></div><div class="r-handle">@americanjoke0</div><div class="r-desc">스탠드업 코미디 팟캐스트. 176회 장수. 게스트 초대석</div></td><td><div class="r-stats"><span>4.68K</span></div></td><td><div class="r-stats"><span>~2,300</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:daywordbird@gmail.com">이메일</a></div></td><td></td></tr>
+<tr data-cat="comedy" data-d="easy"><td><div class="r-name"><a href="https://youtube.com/@뜨거운삼각형" target="_blank">뜨거운삼각형</a><span class="badge b-e">쉬움</span></div><div class="r-handle">@뜨거운삼각형</div><div class="r-desc">개그맨 토크쇼. 매회 게스트 초대. EP.46</div></td><td><div class="r-stats"><span>3.62K</span></div></td><td><div class="r-stats"><span>~6,500</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:hot3talk@gmail.com">이메일</a></div></td><td></td></tr>
+<tr data-cat="comedy" data-d="easy"><td><div class="r-name"><a href="https://youtube.com/@Alexandershowkorea" target="_blank">알렉산더 쇼</a><span class="badge b-e">쉬움</span></div><div class="r-handle">@Alexandershowkorea</div><div class="r-desc">개그맨 알렉산더. 술+안주 코미디 토크쇼</div></td><td><div class="r-stats"><span>수천</span></div></td><td><div class="r-stats"><span>~3,200</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:lazenca0881@naver.com">이메일</a></div></td><td></td></tr>
+<tr data-cat="comedy" data-d="easy"><td><div class="r-name"><a href="https://youtube.com/@문천식매겨드립니다" target="_blank">문천식의 매겨드립니다</a><span class="badge b-e">쉬움</span></div><div class="r-handle">@문천식매겨드립니다</div><div class="r-desc">KBS 개그맨. 전통술+게스트 인생 토크</div></td><td><div class="r-stats"><span>869</span></div></td><td><div class="r-stats"><span>~2,700</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:csmoon1124@gmail.com">이메일</a></div></td><td></td></tr>
+</tbody></table>
 </div>
 
 <!-- ===== 연애 ===== -->
-<h2 class="section-title" id="dating">연애</h2>
-<div class="grid">
-
-<div class="card" data-cat="dating" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@엠장기획" target="_blank">엠장기획 — 잡스러운연애</a></h3><div class="handle">@엠장기획</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">연애/결혼/인간관계 토크쇼. 게스트 초대 빈도 높음. 라이브 방송</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 67.2만</span>
-    <span class="meta-item"><strong>평균</strong> ~4.6만회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:mjang1999@naver.com">mjang1999@naver.com</a>
-  </div>
+<div class="section" data-sec="dating">
+<h2>연애 (7)</h2>
+<table><tbody>
+<tr data-cat="dating" data-d="hard"><td><div class="r-name"><a href="https://youtube.com/@GABEEGIRL" target="_blank">가비 걸 — 퀸즈나잇</a><span class="badge b-h">높음</span></div><div class="r-handle">@GABEEGIRL</div><div class="r-desc">게스트 초대 사연 토크. 연애/일상 고민</div></td><td><div class="r-stats"><span>98.5만</span></div></td><td><div class="r-stats"><span>~30만+</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:gabeegirl@dmil.kr">이메일</a></div></td><td></td></tr>
+<tr data-cat="dating" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@엠장기획" target="_blank">엠장기획 — 잡스러운연애</a><span class="badge b-m">중간</span></div><div class="r-handle">@엠장기획</div><div class="r-desc">연애/결혼/인간관계 토크쇼. 게스트 초대 활발</div></td><td><div class="r-stats"><span>67.2만</span></div></td><td><div class="r-stats"><span>~4.6만</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:mjang1999@naver.com">이메일</a></div></td><td></td></tr>
+<tr data-cat="dating" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@hongcha_._" target="_blank">홍차 HONGCHA</a><span class="badge b-m">중간</span></div><div class="r-handle">@hongcha_._</div><div class="r-desc">연애 초보 토크/상담. 게스트 콜라보 경험 있음</div></td><td><div class="r-stats"><span>17만</span></div></td><td><div class="r-stats"><span>~8,100</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:hongchatv@gmail.com">이메일</a></div></td><td></td></tr>
+<tr data-cat="dating" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@jaehyung.seseung" target="_blank">재형이 동생 세승이</a><span class="badge b-m">중간</span></div><div class="r-handle">@jaehyung.seseung</div><div class="r-desc">남매 유튜버. 20대 연애/라이프스타일 게스트 초대</div></td><td><div class="r-stats"><span>13만</span></div></td><td><div class="r-stats"><span>~6.6만</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:seseung@ticket2themoon.net">이메일</a><a class="c-insta" href="https://instagram.com/_seseung" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="dating" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@okiki_okk" target="_blank">오키키 — 아무튼떠들러왔는데</a><span class="badge b-m">중간</span></div><div class="r-handle">@okiki_okk</div><div class="r-desc">리얼리티 출연자 게스트 다수. 연애/패션/술자리</div></td><td><div class="r-stats"><span>10.4만</span></div></td><td><div class="r-stats"><span>~34만</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:okiki.okk.official@gmail.com">이메일</a><a class="c-insta" href="https://instagram.com/okiki._.official" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="dating" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@두말하면잔소리" target="_blank">두말하면 잔소리</a><span class="badge b-m">중간</span></div><div class="r-handle">@두말하면잔소리</div><div class="r-desc">30대 여성 수다 팟캐스트. 게스트편 조회수 높음</div></td><td><div class="r-stats"><span>3.81만</span></div></td><td><div class="r-stats"><span>~3.3만</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:hemtube@videovillage.co.kr">이메일</a></div></td><td></td></tr>
+<tr data-cat="dating" data-d="easy"><td><div class="r-name"><a href="https://youtube.com/@siiiido" target="_blank">오케이 팟캐스트</a><span class="badge b-e">쉬움</span></div><div class="r-handle">@siiiido</div><div class="r-desc">연애/썸 전문 팟캐스트 시즌2. 매주 목요일</div></td><td><div class="r-stats"><span>3.16K</span></div></td><td><div class="r-stats"><span>~8,000</span></div></td><td><div class="r-contact"><a class="c-insta" href="https://instagram.com/okaaay_pod" target="_blank">인스타 DM</a></div></td><td></td></tr>
+</tbody></table>
 </div>
 
-<div class="card" data-cat="dating" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@jaehyung.seseung" target="_blank">재형이 동생 세승이</a></h3><div class="handle">@jaehyung.seseung</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">남매 유튜버 일상 토크 팟캐스트. 20대 연애/라이프스타일 게스트 초대</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 13만</span>
-    <span class="meta-item"><strong>평균</strong> ~6.6만회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:seseung@ticket2themoon.net">seseung@ticket2themoon.net</a>
-    <a class="insta" href="https://instagram.com/_seseung" target="_blank">@_seseung</a>
-  </div>
-</div>
-
-<div class="card" data-cat="dating" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@okiki_okk" target="_blank">오키키 — 아무튼떠들러왔는데</a></h3><div class="handle">@okiki_okk</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">리얼리티 출연자 게스트 다수. 연애/패션/술자리 다양한 주제</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 10.4만</span>
-    <span class="meta-item"><strong>평균</strong> ~34만회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:okiki.okk.official@gmail.com">okiki.okk.official@gmail.com</a>
-    <a class="insta" href="https://instagram.com/okiki._.official" target="_blank">@okiki._.official</a>
-  </div>
-</div>
-
-<div class="card" data-cat="dating" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@hongcha_._" target="_blank">홍차 HONGCHA</a></h3><div class="handle">@hongcha_._</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">연애 초보 대상 토크/상담. 게스트 콜라보 경험 있음</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 17만</span>
-    <span class="meta-item"><strong>평균</strong> ~8,100회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:hongchatv@gmail.com">hongchatv@gmail.com</a>
-  </div>
-</div>
-
-<div class="card" data-cat="dating" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@두말하면잔소리" target="_blank">두말하면 잔소리</a></h3><div class="handle">@두말하면잔소리</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">30대 여성 수다 팟캐스트. 게스트 에피소드에서 조회수 높은 경향</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 3.81만</span>
-    <span class="meta-item"><strong>평균</strong> ~3.3만회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:hemtube@videovillage.co.kr">hemtube@videovillage.co.kr</a>
-  </div>
-</div>
-
-<div class="card" data-cat="dating" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@siiiido" target="_blank">오케이 팟캐스트</a></h3><div class="handle">@siiiido</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">연애/썸 전문 팟캐스트 시즌2. 매주 목요일 업로드</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 3.16K</span>
-    <span class="meta-item"><strong>평균</strong> ~8,000회</span>
-  </div>
-  <div class="contact">
-    <a class="insta" href="https://instagram.com/okaaay_pod" target="_blank">@okaaay_pod (DM)</a>
-  </div>
-</div>
-
-<div class="card" data-cat="dating" data-diff="hard">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@GABEEGIRL" target="_blank">가비 걸 — 퀸즈나잇</a></h3><div class="handle">@GABEEGIRL</div></div>
-    <span class="badge badge-hard">높음</span>
-  </div>
-  <div class="desc">퀸즈나잇 시리즈 게스트 초대 사연 토크. 연애/일상 고민 중심</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 98.5만</span>
-    <span class="meta-item"><strong>평균</strong> ~30만+</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:gabeegirl@dmil.kr">gabeegirl@dmil.kr</a>
-  </div>
-</div>
-
-</div>
-
-<!-- ===== 인터뷰 / 커리어 ===== -->
-<h2 class="section-title" id="interview">인터뷰 / 커리어</h2>
-<div class="grid">
-
-<div class="card" data-cat="interview" data-diff="hard">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@tamgulife" target="_blank">탐구생활</a></h3><div class="handle">@tamgulife</div></div>
-    <span class="badge badge-hard">높음</span>
-  </div>
-  <div class="desc">"평범하지 않아요, 당신의 이야기는" 독특한 직업/인생 인터뷰. 매회 새 게스트</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 55.2만</span>
-    <span class="meta-item"><strong>평균</strong> ~350만+</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:money.tglife@gmail.com">money.tglife@gmail.com</a>
-    <a class="insta" href="https://instagram.com/tamgulife.story" target="_blank">@tamgulife.story</a>
-  </div>
-</div>
-
-<div class="card" data-cat="interview" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@oOo_blahblah" target="_blank">입만열면 — 트루만쇼</a></h3><div class="handle">@oOo_blahblah</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">매회 유명인/크리에이터 게스트 초대 토크쇼. 침착맨 커넥션 활용 가능</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 3.96만</span>
-    <span class="meta-item"><strong>평균</strong> ~48만회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:thetruemanshowkr@gmail.com">thetruemanshowkr@gmail.com</a>
-    <a class="insta" href="https://instagram.com/thetruemanshow_kr" target="_blank">@thetruemanshow_kr</a>
-  </div>
-</div>
-
-<div class="card" data-cat="interview" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@zaksimpodcast" target="_blank">작심 팟캐스트</a></h3><div class="handle">@zaksimpodcast</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">매회 게스트 인터뷰. 진로/창업/크리에이터 주제</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 7.29만</span>
-    <span class="meta-item"><strong>평균</strong> ~5.8만회</span>
-  </div>
-  <div class="contact">
-    <a class="insta" href="https://instagram.com/zaksimsamilpodcast" target="_blank">@zaksimsamilpodcast (DM)</a>
-  </div>
-</div>
-
-<div class="card" data-cat="interview" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@쩐문가" target="_blank">쩐문가</a></h3><div class="handle">@쩐문가</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">"돈이 되는 대화를 나눕니다" 재테크/커리어 인터뷰 토크쇼</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 13.7만</span>
-    <span class="meta-item"><strong>평균</strong> ~3.1만회</span>
-  </div>
-  <div class="contact"><span class="link">채널 문의 기능</span></div>
-</div>
-
-<div class="card" data-cat="interview" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@인생탐구생활-u6d" target="_blank">인생탐구생활</a></h3><div class="handle">@인생탐구생활-u6d</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">다양한 직업/인생 스토리 인터뷰. 매 영상 새 게스트</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 7.9만</span>
-    <span class="meta-item"><strong>평균</strong> ~5.3만회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:jyg039@gmail.com">jyg039@gmail.com</a>
-    <a class="insta" href="https://instagram.com/yonggu918" target="_blank">@yonggu918</a>
-  </div>
-</div>
-
-<div class="card" data-cat="interview" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@퇴사한동동주" target="_blank">퇴사한 동동주</a></h3><div class="handle">@퇴사한동동주</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">퇴사한 예능 PD 운영. "동동주 주막" 팟캐스트. 연예인/PD 게스트 (이광수 등)</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 1.82만</span>
-    <span class="meta-item"><strong>평균</strong> ~5,667회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:dongdongju.pd@gmail.com">dongdongju.pd@gmail.com</a>
-    <a class="insta" href="https://instagram.com/dongx2ju" target="_blank">@dongx2ju</a>
-  </div>
-</div>
-
-<div class="card" data-cat="interview" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@WORKERSHIGHCLUB" target="_blank">WORKERS' HIGH</a></h3><div class="handle">@WORKERSHIGHCLUB</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">"일을 통해 경험하는 희열" 커리어 인터뷰 팟캐스트. 다양한 직업인 초대</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 7.66K</span>
-    <span class="meta-item"><strong>평균</strong> ~640회</span>
-  </div>
-  <div class="contact">
-    <a class="insta" href="https://instagram.com/workershighclub" target="_blank">@workershighclub</a>
-  </div>
-</div>
-
-<div class="card" data-cat="interview" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@studioDRMR" target="_blank">두루마리 스튜디오 — 웃사방</a></h3><div class="handle">@studioDRMR</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">"커리어 뒤에 숨은 선택과 생각" 인플루언서/크리에이터 게스트 초대. EP08까지</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 1.61K</span>
-    <span class="meta-item"><strong>평균</strong> ~9,300회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:official@songlemusic.com">official@songlemusic.com</a>
-  </div>
-</div>
-
-<div class="card" data-cat="interview" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@수상한팟캐스트" target="_blank">수상한팟캐스트</a></h3><div class="handle">@수상한팟캐스트</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">"다양한 크리에이터들의 수상한 이야기" 크리에이터/IT 인터뷰 팟캐스트</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 4,260</span>
-    <span class="meta-item"><strong>평균</strong> ~1.15만회</span>
-  </div>
-  <div class="contact"><span class="link">채널 문의</span></div>
-</div>
-
-<div class="card" data-cat="interview" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@원싸이트" target="_blank">김원샷의 원싸이트</a></h3><div class="handle">@원싸이트</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">학습/성장 인사이트 팟캐스트. 매주 전문가 게스트 섭외</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 2.3만</span>
-    <span class="meta-item"><strong>평균</strong> ~2.2만회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:1shotkim@naver.com">1shotkim@naver.com</a>
-    <a class="insta" href="https://instagram.com/oneshot_insight" target="_blank">@oneshot_insight</a>
-  </div>
-</div>
-
+<!-- ===== 인터뷰/커리어 ===== -->
+<div class="section" data-sec="interview">
+<h2>인터뷰 / 커리어 (10)</h2>
+<table><tbody>
+<tr data-cat="interview" data-d="hard"><td><div class="r-name"><a href="https://youtube.com/@tamgulife" target="_blank">탐구생활</a><span class="badge b-h">높음</span></div><div class="r-handle">@tamgulife</div><div class="r-desc">"평범하지 않은 이야기" 독특한 직업/인생 인터뷰</div></td><td><div class="r-stats"><span>55.2만</span></div></td><td><div class="r-stats"><span>~350만+</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:money.tglife@gmail.com">이메일</a><a class="c-insta" href="https://instagram.com/tamgulife.story" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="interview" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@oOo_blahblah" target="_blank">입만열면 — 트루만쇼</a><span class="badge b-m">중간</span></div><div class="r-handle">@oOo_blahblah</div><div class="r-desc">매회 유명인/크리에이터 게스트 토크쇼</div></td><td><div class="r-stats"><span>3.96만</span></div></td><td><div class="r-stats"><span>~48만</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:thetruemanshowkr@gmail.com">이메일</a><a class="c-insta" href="https://instagram.com/thetruemanshow_kr" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="interview" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@인생탐구생활-u6d" target="_blank">인생탐구생활</a><span class="badge b-m">중간</span></div><div class="r-handle">@인생탐구생활-u6d</div><div class="r-desc">다양한 직업/인생 스토리 인터뷰</div></td><td><div class="r-stats"><span>7.9만</span></div></td><td><div class="r-stats"><span>~5.3만</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:jyg039@gmail.com">이메일</a><a class="c-insta" href="https://instagram.com/yonggu918" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="interview" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@zaksimpodcast" target="_blank">작심 팟캐스트</a><span class="badge b-m">중간</span></div><div class="r-handle">@zaksimpodcast</div><div class="r-desc">매회 게스트 인터뷰. 진로/창업/크리에이터</div></td><td><div class="r-stats"><span>7.29만</span></div></td><td><div class="r-stats"><span>~5.8만</span></div></td><td><div class="r-contact"><a class="c-insta" href="https://instagram.com/zaksimsamilpodcast" target="_blank">인스타 DM</a></div></td><td></td></tr>
+<tr data-cat="interview" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@쩐문가" target="_blank">쩐문가</a><span class="badge b-m">중간</span></div><div class="r-handle">@쩐문가</div><div class="r-desc">"돈이 되는 대화" 재테크/커리어 인터뷰 토크쇼</div></td><td><div class="r-stats"><span>13.7만</span></div></td><td><div class="r-stats"><span>~3.1만</span></div></td><td><div class="r-contact"><span class="c-link">채널 문의</span></div></td><td></td></tr>
+<tr data-cat="interview" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@퇴사한동동주" target="_blank">퇴사한 동동주</a><span class="badge b-m">중간</span></div><div class="r-handle">@퇴사한동동주</div><div class="r-desc">퇴사 예능PD. "동동주 주막" 연예인 게스트 팟캐</div></td><td><div class="r-stats"><span>1.82만</span></div></td><td><div class="r-stats"><span>~5,667</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:dongdongju.pd@gmail.com">이메일</a><a class="c-insta" href="https://instagram.com/dongx2ju" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="interview" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@원싸이트" target="_blank">김원샷의 원싸이트</a><span class="badge b-m">중간</span></div><div class="r-handle">@원싸이트</div><div class="r-desc">학습/성장 인사이트 팟캐스트. 매주 전문가 게스트</div></td><td><div class="r-stats"><span>2.3만</span></div></td><td><div class="r-stats"><span>~2.2만</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:1shotkim@naver.com">이메일</a><a class="c-insta" href="https://instagram.com/oneshot_insight" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="interview" data-d="easy"><td><div class="r-name"><a href="https://youtube.com/@수상한팟캐스트" target="_blank">수상한팟캐스트</a><span class="badge b-e">쉬움</span></div><div class="r-handle">@수상한팟캐스트</div><div class="r-desc">크리에이터/IT 인터뷰 팟캐스트</div></td><td><div class="r-stats"><span>4,260</span></div></td><td><div class="r-stats"><span>~1.15만</span></div></td><td><div class="r-contact"><span class="c-link">채널 문의</span></div></td><td></td></tr>
+<tr data-cat="interview" data-d="easy"><td><div class="r-name"><a href="https://youtube.com/@WORKERSHIGHCLUB" target="_blank">WORKERS' HIGH</a><span class="badge b-e">쉬움</span></div><div class="r-handle">@WORKERSHIGHCLUB</div><div class="r-desc">커리어 인터뷰 팟캐스트. 다양한 직업인 초대</div></td><td><div class="r-stats"><span>7.66K</span></div></td><td><div class="r-stats"><span>~640</span></div></td><td><div class="r-contact"><a class="c-insta" href="https://instagram.com/workershighclub" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="interview" data-d="easy"><td><div class="r-name"><a href="https://youtube.com/@studioDRMR" target="_blank">두루마리 스튜디오 — 웃사방</a><span class="badge b-e">쉬움</span></div><div class="r-handle">@studioDRMR</div><div class="r-desc">커리어 뒤에 숨은 이야기. 인플루언서 게스트</div></td><td><div class="r-stats"><span>1.61K</span></div></td><td><div class="r-stats"><span>~9,300</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:official@songlemusic.com">이메일</a></div></td><td></td></tr>
+</tbody></table>
 </div>
 
 <!-- ===== 라이프스타일 ===== -->
-<h2 class="section-title" id="lifestyle">라이프스타일</h2>
-<div class="grid">
-
-<div class="card" data-cat="lifestyle" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@낯박살" target="_blank">낯박살 스튜디오</a></h3><div class="handle">@낯박살</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">고민상담 라이브 + 문화 이야기. 주2회 라이브. 패널 토크 형식</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 6.43만</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:natbaksal.biz@gmail.com">natbaksal.biz@gmail.com</a>
-  </div>
-</div>
-
-<div class="card" data-cat="lifestyle" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@cassiopeiabook" target="_blank">카시오페아출판사</a></h3><div class="handle">@cassiopeiabook</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">낮술 토크 형식. 인생/커리어/라이프스타일 게스트 토크</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 2.95만</span>
-    <span class="meta-item"><strong>평균</strong> ~2,300회</span>
-  </div>
-  <div class="contact">
-    <a class="insta" href="https://instagram.com/cassiopeia_book" target="_blank">@cassiopeia_book</a>
-  </div>
-</div>
-
-<div class="card" data-cat="lifestyle" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@ContentsPodcast" target="_blank">주힘찬의 유튜브 팟캐스트</a></h3><div class="handle">@ContentsPodcast</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">유튜브 컨설팅 전문가. 크리에이터/팟캐스트 프로듀서 게스트 초대</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 6.47K</span>
-    <span class="meta-item"><strong>평균</strong> ~720회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:doctortube@naver.com">doctortube@naver.com</a>
-    <a class="insta" href="https://instagram.com/joohimchan" target="_blank">@joohimchan</a>
-  </div>
-</div>
-
+<div class="section" data-sec="lifestyle">
+<h2>라이프스타일 (3)</h2>
+<table><tbody>
+<tr data-cat="lifestyle" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@낯박살" target="_blank">낯박살 스튜디오</a><span class="badge b-m">중간</span></div><div class="r-handle">@낯박살</div><div class="r-desc">고민상담 라이브 + 문화 이야기. 주2회 라이브 패널 토크</div></td><td><div class="r-stats"><span>6.43만</span></div></td><td><div class="r-stats"><span>-</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:natbaksal.biz@gmail.com">이메일</a></div></td><td></td></tr>
+<tr data-cat="lifestyle" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@cassiopeiabook" target="_blank">카시오페아출판사</a><span class="badge b-m">중간</span></div><div class="r-handle">@cassiopeiabook</div><div class="r-desc">낮술 토크. 인생/커리어/라이프스타일 게스트 토크</div></td><td><div class="r-stats"><span>2.95만</span></div></td><td><div class="r-stats"><span>~2,300</span></div></td><td><div class="r-contact"><a class="c-insta" href="https://instagram.com/cassiopeia_book" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="lifestyle" data-d="easy"><td><div class="r-name"><a href="https://youtube.com/@ContentsPodcast" target="_blank">주힘찬의 유튜브 팟캐스트</a><span class="badge b-e">쉬움</span></div><div class="r-handle">@ContentsPodcast</div><div class="r-desc">유튜브 컨설팅. 크리에이터 게스트 초대</div></td><td><div class="r-stats"><span>6.47K</span></div></td><td><div class="r-stats"><span>~720</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:doctortube@naver.com">이메일</a><a class="c-insta" href="https://instagram.com/joohimchan" target="_blank">인스타</a></div></td><td></td></tr>
+</tbody></table>
 </div>
 
 <!-- ===== 기타 ===== -->
-<h2 class="section-title" id="misc">기타 (장르불문)</h2>
-<div class="grid">
-
-<div class="card" data-cat="misc" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@fightcomedyclub" target="_blank">파이트코미디클럽 — 리어 네이키드 토크</a></h3><div class="handle">@fightcomedyclub</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">코미디언+UFC 해설위원 격투기&코미디 팟캐스트. EP55까지</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 1.88만</span>
-    <span class="meta-item"><strong>평균</strong> ~7,300회</span>
-  </div>
-  <div class="contact">
-    <a class="insta" href="https://instagram.com/fight.comedyclub" target="_blank">@fight.comedyclub</a>
-  </div>
-</div>
-
-<div class="card" data-cat="misc" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@상남자주식회사" target="_blank">상남자 주식회사</a></h3><div class="handle">@SANGNAMJA77</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">격투기/스파링 + 게스트 토크. 다양한 파이터/유명인 초대</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 26.1만</span>
-    <span class="meta-item"><strong>평균</strong> ~1.4만회</span>
-  </div>
-  <div class="contact">
-    <a class="email" href="mailto:gimhonggi969@gmail.com">gimhonggi969@gmail.com</a>
-  </div>
-</div>
-
-<div class="card" data-cat="misc" data-diff="mid">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@TaejungRho" target="_blank">노태정</a></h3><div class="handle">@TaejungRho</div></div>
-    <span class="badge badge-mid">중간</span>
-  </div>
-  <div class="desc">역사/정치/사회 인터뷰 팟캐스트. 매회 전문가 심층 대담. #80까지</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 5.06만</span>
-    <span class="meta-item"><strong>평균</strong> ~7,400회</span>
-  </div>
-  <div class="contact"><span class="link">채널 문의</span></div>
-</div>
-
-<div class="card user-added" data-cat="misc" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/channel/UCZnDD_Kjr67LEwN0rxgNBlQ" target="_blank">홍콩참치만두 — 홍참만</a></h3><div class="handle">@홍콩참치만두</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">"누군가는 해야하는 이야기" 팟캐스트. 가식없는 토크. 게스트 초대 형식</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> ~100+</span>
-    <span class="meta-item"><strong>평균</strong> 집계 중</span>
-  </div>
-  <div class="contact">
-    <a class="insta" href="https://instagram.com/hongkongtunadumpling" target="_blank">@hongkongtunadumpling</a>
-  </div>
-</div>
-
-<div class="card user-added" data-cat="hiphop" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/channel/UC2M6SkJWEK6ehHB8az6Mcpw" target="_blank">드럼통 프렌즈</a></h3><div class="handle">@드럼통프렌즈</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">"한국 최고의 힙합 팟캐스트" 언더 래퍼 인터뷰 + 라이브 퍼포먼스. 매주 업로드</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 870</span>
-    <span class="meta-item"><strong>평균</strong> ~1,012회</span>
-  </div>
-  <div class="contact">
-    <a class="link" href="https://linktr.ee/DRTfriends" target="_blank">linktr.ee/DRTfriends</a>
-  </div>
-</div>
-
-<div class="card user-added" data-cat="misc" data-diff="easy">
-  <div class="top">
-    <div><h3><a href="https://youtube.com/@agaleeallseeda" target="_blank">아가리 올시다</a></h3><div class="handle">@agaleeallseeda</div></div>
-    <span class="badge badge-easy">쉬움</span>
-  </div>
-  <div class="desc">팟캐스트 채널. 다양한 주제로 게스트와 솔직한 토크 진행. 총 조회수 122만</div>
-  <div class="meta">
-    <span class="meta-item"><strong>구독자</strong> 2.01K</span>
-    <span class="meta-item"><strong>평균</strong> 집계 중</span>
-  </div>
-  <div class="contact">
-    <a class="link" href="https://youtube.com/@agaleeallseeda" target="_blank">채널 바로가기</a>
-  </div>
+<div class="section" data-sec="misc">
+<h2>기타 (5)</h2>
+<table><tbody>
+<tr data-cat="misc" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@fightcomedyclub" target="_blank">파이트코미디클럽</a><span class="badge b-m">중간</span></div><div class="r-handle">@fightcomedyclub</div><div class="r-desc">코미디언+UFC 해설위원 격투기&코미디 팟캐스트</div></td><td><div class="r-stats"><span>1.88만</span></div></td><td><div class="r-stats"><span>~7,300</span></div></td><td><div class="r-contact"><a class="c-insta" href="https://instagram.com/fight.comedyclub" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="misc" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@SANGNAMJA77" target="_blank">상남자 주식회사</a><span class="badge b-m">중간</span></div><div class="r-handle">@SANGNAMJA77</div><div class="r-desc">격투기/스파링 + 게스트 토크</div></td><td><div class="r-stats"><span>26.1만</span></div></td><td><div class="r-stats"><span>~1.4만</span></div></td><td><div class="r-contact"><a class="c-email" href="mailto:gimhonggi969@gmail.com">이메일</a></div></td><td></td></tr>
+<tr data-cat="misc" data-d="easy"><td><div class="r-name"><a href="https://youtube.com/channel/UCZnDD_Kjr67LEwN0rxgNBlQ" target="_blank">홍콩참치만두 — 홍참만</a><span class="badge b-e">쉬움</span><span class="user-tag">직접추가</span></div><div class="r-handle">@홍콩참치만두</div><div class="r-desc">"누군가는 해야하는 이야기" 가식없는 팟캐스트</div></td><td><div class="r-stats"><span>~100+</span></div></td><td><div class="r-stats"><span>-</span></div></td><td><div class="r-contact"><a class="c-insta" href="https://instagram.com/hongkongtunadumpling" target="_blank">인스타</a></div></td><td></td></tr>
+<tr data-cat="misc" data-d="easy"><td><div class="r-name"><a href="https://youtube.com/@agaleeallseeda" target="_blank">아가리 올시다</a><span class="badge b-e">쉬움</span><span class="user-tag">직접추가</span></div><div class="r-handle">@agaleeallseeda</div><div class="r-desc">팟캐스트 채널. 솔직한 토크. 총 조회수 122만</div></td><td><div class="r-stats"><span>2.01K</span></div></td><td><div class="r-stats"><span>-</span></div></td><td><div class="r-contact"><a class="c-link" href="https://youtube.com/@agaleeallseeda" target="_blank">채널</a></div></td><td></td></tr>
+<tr data-cat="misc" data-d="mid"><td><div class="r-name"><a href="https://youtube.com/@TaejungRho" target="_blank">노태정</a><span class="badge b-m">중간</span></div><div class="r-handle">@TaejungRho</div><div class="r-desc">역사/정치/사회 심층 인터뷰 팟캐스트. #80까지</div></td><td><div class="r-stats"><span>5.06만</span></div></td><td><div class="r-stats"><span>~7,400</span></div></td><td><div class="r-contact"><span class="c-link">채널 문의</span></div></td><td></td></tr>
+</tbody></table>
 </div>
 
 </div>
 
-</div>
-
-<footer>
-  윤담백 팟캐스트 출연 리서치 &middot; 2026.04.04 &middot; Generated by Claude Code
-</footer>
+<footer>윤담백 팟캐스트 리서치 · 2026.04.04 · Claude Code</footer>
 
 <script>
-function filterCards(cat) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
-
-  const cards = document.querySelectorAll('.card');
-  const sections = document.querySelectorAll('.section-title');
-
-  if (cat === 'all') {
-    cards.forEach(c => c.style.display = '');
-    sections.forEach(s => s.style.display = '');
-    return;
-  }
-
-  if (cat === 'easy') {
-    cards.forEach(c => {
-      c.style.display = c.dataset.diff === 'easy' ? '' : 'none';
-    });
-    sections.forEach(s => {
-      const grid = s.nextElementSibling;
-      const visible = grid.querySelectorAll('.card:not([style*="display: none"])');
-      s.style.display = visible.length ? '' : 'none';
-    });
-    return;
-  }
-
-  cards.forEach(c => {
-    c.style.display = c.dataset.cat === cat ? '' : 'none';
+function ft(c,el){
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('tr[data-cat]').forEach(r=>{
+    if(c==='all') r.style.display='';
+    else if(c==='easy') r.style.display=r.dataset.d==='easy'?'':'none';
+    else r.style.display=r.dataset.cat===c?'':'none';
   });
-  sections.forEach(s => {
-    const grid = s.nextElementSibling;
-    const visible = grid.querySelectorAll('.card:not([style*="display: none"])');
-    s.style.display = visible.length ? '' : 'none';
+  document.querySelectorAll('.section').forEach(s=>{
+    const vis=s.querySelectorAll('tr[data-cat]:not([style*="display: none"])');
+    s.style.display=vis.length?'':'none';
   });
 }
 </script>
-
 </body>
 </html>
